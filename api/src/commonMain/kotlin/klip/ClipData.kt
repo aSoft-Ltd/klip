@@ -1,5 +1,5 @@
 package klip
 
 interface ClipData {
-    val asText: TextClipData
+    val asText: String
 }

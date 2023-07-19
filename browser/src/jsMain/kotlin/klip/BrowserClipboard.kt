@@ -10,5 +10,5 @@ class BrowserClipboard : AbstractClipboard() {
 
     override fun data() = clipboard.readText().then { TextClipData(it) }.asLater()
 
-    override fun set(data: ClipData) = clipboard.writeText(data.asText.content).asLater()
+    override fun set(data: ClipData) = clipboard.writeText(data.asText).asLater()
 }
