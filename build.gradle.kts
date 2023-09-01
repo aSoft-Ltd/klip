@@ -13,10 +13,12 @@ repositories {
     publicRepos()
 }
 
-val v = asoft.versions.root.get()
+val v = libs.versions.asoft.get()
 
-group = "tz.co.asoft"
-version = v
+allprojects {
+    group = "tz.co.asoft"
+    version = v
+}
 
 tasks.dokkaHtmlMultiModule {
     moduleName.set("Klip")
