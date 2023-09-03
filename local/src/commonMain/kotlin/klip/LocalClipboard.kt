@@ -11,7 +11,8 @@ class LocalClipboard : AbstractClipboard() {
         else -> Later(c)
     }
 
-    override fun set(data: ClipData) {
+    override fun set(data: ClipData) : Later<Unit> {
         content = data
+        return Later(Unit)
     }
 }
