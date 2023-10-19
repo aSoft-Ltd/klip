@@ -6,7 +6,7 @@ import kotlinx.browser.window
 
 class BrowserClipboard : AbstractClipboard() {
 
-    val clipboard = window.navigator.clipboard
+    val clipboard by lazy { window.navigator.clipboard }
 
     override fun data() = clipboard.readText().then { TextClipData(it) }.asLater()
 
