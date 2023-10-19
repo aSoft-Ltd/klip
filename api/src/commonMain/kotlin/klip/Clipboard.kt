@@ -1,6 +1,10 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package klip
 
 import koncurrent.Later
+import kotlin.js.JsExport
 
 interface Clipboard {
     fun data(): Later<ClipData>
