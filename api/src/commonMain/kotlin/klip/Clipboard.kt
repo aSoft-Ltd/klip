@@ -4,7 +4,7 @@
 package klip
 
 import koncurrent.Later
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 interface Clipboard {
     fun data(): Later<ClipData>
