@@ -1,12 +1,21 @@
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
 }
 
-description = "An kotlin multiplaform abstraction for copying things to the clipboard"
+description = "A kotlin multiplatform implementation of the clipboard api that just copy everything in memory"
+
+configureAndroid("src/androidMain") {
+    namespace = "tz.co.asoft.klip"
+    defaultConfig {
+        minSdk = 8
+    }
+}
 
 kotlin {
+    if (Targeting.ANDROID) androidTarget { library() }
     if (Targeting.JVM) jvm { library() }
     if (Targeting.JS) js { library() }
     if (Targeting.WASM) wasmJs { library() }
@@ -18,7 +27,24 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.koncurrent.later.core)
+                api(projects.klipApi)
+            }
+        }
+
+        val wasmJsMain by getting {
+            dependencies {
+                implementation(kotlinx.browser)
+            }
+        }
+
+        val todoMain by creating {
+            dependsOn(commonMain)
+        }
+
+        (osxTargets + linuxTargets).forEach {
+            val main by it.compilations.getting {}
+            main.defaultSourceSet {
+                dependsOn(todoMain)
             }
         }
 

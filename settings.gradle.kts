@@ -20,5 +20,5 @@ listOf(
 
 rootProject.name = "klip"
 
-// submodules
-includeSubs("klip", ".", "api", "local", "browser")
+// submodules // TODO: Remove browser clipboard in favor of system clipboard
+includeSubs("klip", ".", "api", "local", "browser", "system")

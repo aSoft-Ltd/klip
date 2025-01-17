@@ -9,16 +9,16 @@ description = "A kotlin multiplatform implementation of the clipboard api that j
 kotlin {
     if (Targeting.JVM) jvm { library() }
     if (Targeting.JS) js(IR) { library() }
-    if (Targeting.WASM) wasm { library() }
+    if (Targeting.WASM) wasmJs { library() }
     val osxTargets = if (Targeting.OSX) osxTargets() else listOf()
-    val ndkTargets = if (Targeting.NDK) ndkTargets() else listOf()
+//    val ndkTargets = if (Targeting.NDK) ndkTargets() else listOf()
     val linuxTargets = if (Targeting.LINUX) linuxTargets() else listOf()
-    val mingwTargets = if (Targeting.MINGW) mingwTargets() else listOf()
+//    val mingwTargets = if (Targeting.MINGW) mingwTargets() else listOf()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-				api(libs.klip.api)
+                api(projects.klipApi)
             }
         }
 
