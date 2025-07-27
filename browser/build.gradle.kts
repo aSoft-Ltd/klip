@@ -10,16 +10,8 @@ kotlin {
     if (Targeting.JS) js(IR) { library() }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-				api(projects.klipApi)
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
-                api(libs.kommander.core)
-            }
+        commonMain.dependencies {
+            api(projects.klipApi)
         }
     }
 }
