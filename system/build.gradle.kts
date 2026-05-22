@@ -19,10 +19,12 @@ kotlin {
     if (Targeting.JVM) jvm { library() }
     if (Targeting.JS) js { library() }
     if (Targeting.WASM) wasmJs { library() }
-    val osxTargets = if (Targeting.OSX) osxTargets() else listOf()
+    val osxTargets = if (Targeting.OSX) (iosTargets() + macOsTargets()) else listOf()
 //    val ndkTargets = if (Targeting.NDK) ndkTargets() else listOf()
     val linuxTargets = if (Targeting.LINUX) linuxTargets() else listOf()
-//    val mingwTargets = if (Targeting.MINGW) mingwTargets() else listOf()
+    val mingwTargets = if (Targeting.MINGW) mingwTargets() else listOf()
+
+    applyDefaultHierarchyTemplate()
 
     sourceSets {
         val commonMain by getting {
@@ -40,17 +42,6 @@ kotlin {
 
         jvmTest.dependencies {
             implementation(kotlin("test-junit5"))
-        }
-
-        val todoMain by creating {
-            dependsOn(commonMain)
-        }
-
-        (osxTargets + linuxTargets).forEach {
-            val main by it.compilations.getting {}
-            main.defaultSourceSet {
-                dependsOn(todoMain)
-            }
         }
 
         commonTest.dependencies {
