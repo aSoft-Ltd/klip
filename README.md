@@ -28,7 +28,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("tz.co.asoft:klip-system:<version>")
+                implementation("tz.co.asoft:klip-api:<version>")
+                implementation("tz.co.asoft:klip-system:<version>") // To be used in production environments
+                implementation("tz.co.asoft:klip-api:<version>") // To be used testing & mock environments
             }
         }
     }
