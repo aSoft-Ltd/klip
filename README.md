@@ -28,7 +28,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("tz.co.asoft:klip-system:3.3.8")
+                implementation("tz.co.asoft:klip-system:<version>")
             }
         }
     }
@@ -38,7 +38,7 @@ kotlin {
 ### Single Platform (e.g., JVM)
 ```kotlin
 dependencies {
-    implementation("tz.co.asoft:klip-system:3.3.8")
+    implementation("tz.co.asoft:klip-system:<version>")
 }
 ```
 
@@ -76,5 +76,22 @@ val entry = PlainText("Structured Text")
 clipboard.set(entry)
 ```
 
+## ClipEntry
+
+Klip has been implemented with with extensibility in mind, and supports the following ClipEntry types: 
+
+
+✅ PlainText (Current available)
+
+❌ File/Blob (To be implemented)
+
+❌ Image (To be implemented)
+
+❌ Url (To be implemented)
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributors
+
+- [andylamax](https://github.com/andylamax)
