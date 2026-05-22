@@ -1,10 +1,13 @@
 package klip
 
 import klip.internal.AbstractClipboard
-import koncurrent.Later
-import koncurrent.TODOLater
 
 actual class SystemClipboard : AbstractClipboard(), Clipboard {
-    actual override fun data(): Later<ClipData> = TODOLater()
-    actual override fun set(data: ClipData): Later<Unit> = TODOLater()
+    actual override suspend fun entry(): ClipEntry? {
+        TODO()
+    }
+
+    actual override suspend fun set(entry: ClipEntry) {
+
+    }
 }

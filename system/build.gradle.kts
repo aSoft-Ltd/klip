@@ -10,7 +10,7 @@ description = "A kotlin multiplatform implementation of the clipboard api that j
 configureAndroid("src/androidMain") {
     namespace = "tz.co.asoft.klip"
     defaultConfig {
-        minSdk = 8
+        minSdk = 11
     }
 }
 
@@ -28,6 +28,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.klipApi)
+                implementation(kotlinx.coroutines.core)
             }
         }
 
@@ -35,6 +36,10 @@ kotlin {
             dependencies {
                 implementation(kotlinx.browser)
             }
+        }
+
+        jvmTest.dependencies {
+            implementation(kotlin("test-junit5"))
         }
 
         val todoMain by creating {
@@ -48,10 +53,11 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
-            dependencies {
-                api(libs.kommander.core)
-            }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(libs.kommander.core)
+            implementation(libs.kommander.coroutines)
+            implementation(kotlinx.coroutines.test)
         }
     }
 }

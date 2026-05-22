@@ -1,15 +1,20 @@
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package klip
 
 import klip.internal.AbstractClipboard
-import koncurrent.Later
-import koncurrent.later.asLater
 import kotlinx.browser.window
+import kotlinx.coroutines.await
 
 actual class SystemClipboard : AbstractClipboard(), Clipboard {
-
     val native by lazy { window.navigator.clipboard }
+    actual override suspend fun entry(): ClipEntry? {
+        val text: JsString = native.readText().await()
+        return PlainText(text.toString())
+    }
 
-    actual override fun data(): Later<ClipData> = native.readText().asLater().then { TextClipData(it.toString()) }
-
-    actual override fun set(data: ClipData) = native.writeText(data.asText).then { data.asText.toJsString() }.asLater().then { Unit }
+    actual override suspend fun set(entry: ClipEntry) {
+        if (entry !is PlainTextClipEntry) error("Only TextClipEntry is supported by this Clipboard at the moment")
+        native.writeText(entry.content)
+    }
 }

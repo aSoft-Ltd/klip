@@ -14,11 +14,9 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 }
 
 listOf(
-    "kommander", "kollections", "kevlar", "koncurrent",
-    "kase"
+    "kommander", "kollections", "kevlar", "kase", "kotlinx-interoperable"
 ).forEach { includeBuild("../$it") }
 
 rootProject.name = "klip"
 
-// submodules // TODO: Remove browser clipboard in favor of system clipboard
-includeSubs("klip", ".", "api", "local", "browser", "system")
+includeSubs("klip", ".", "api", "local", "system")

@@ -3,13 +3,14 @@
 
 package klip
 
-import koncurrent.Later
 import kotlinx.JsExport
+import kotlinx.JsName
 
 interface Clipboard {
-    fun data(): Later<ClipData>
+    suspend fun entry(): ClipEntry?
 
-    fun set(data: ClipData): Later<Unit>
+    suspend fun set(entry: ClipEntry)
 
-    fun setText(content: String): Later<Unit>
+    @JsName("setPlainText")
+    suspend fun set(text: String)
 }

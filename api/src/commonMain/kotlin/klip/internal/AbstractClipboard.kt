@@ -1,8 +1,8 @@
 package klip.internal
 
 import klip.Clipboard
-import klip.TextClipData
+import klip.PlainText
 
 abstract class AbstractClipboard : Clipboard {
-    override fun setText(content: String) = set(TextClipData(content))
+    override suspend fun set(text: String) = set(PlainText(text))
 }

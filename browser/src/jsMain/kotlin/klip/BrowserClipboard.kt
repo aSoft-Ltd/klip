@@ -8,7 +8,7 @@ class BrowserClipboard : AbstractClipboard() {
 
     val clipboard by lazy { window.navigator.clipboard }
 
-    override fun data() = clipboard.readText().then { TextClipData(it) }.asLater()
+    override fun data() = clipboard.readText().then { ClipEntry(it) }.asLater()
 
-    override fun set(data: ClipData) = clipboard.writeText(data.asText).asLater()
+    override fun set(data: ClipEntry) = clipboard.writeText(data.asText).asLater()
 }
